@@ -1,1 +1,72 @@
 
+#include <iostream>
+#include <fstream>
+#include <vector>
+
+using namespace std;
+
+
+void readAdjacencyMatrix(const string& filename, int &N, vector<vector<int> > &adjacencyMatrix) {
+    ifstream file(filename.c_str()); 
+    if (!file.is_open()) {
+        cout << "Kh�ng tim thay tep " << filename << endl;
+        return;
+    }
+
+    file >> N;
+    adjacencyMatrix.resize(N, vector<int>(N, 0));
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            file >> adjacencyMatrix[i][j];
+        }
+    }
+
+    file.close();
+}
+
+
+void printAdjacencyMatrix(int N, vector<vector<int> > &adjacencyMatrix) {
+    cout << "Ma tran ke:" << endl;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            cout << adjacencyMatrix[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+
+bool isSymmetric(int N, vector<vector<int> > &adjacencyMatrix) {
+    for (int i = 0; i < N; i++) {
+        for (int j = i + 1; j < N; j++) {
+            if (adjacencyMatrix[i][j] != adjacencyMatrix[j][i]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+int main() {
+    string filename = "DOTHI.INP";
+    int N;
+    vector<vector<int> > adjacencyMatrix;
+
+    readAdjacencyMatrix(filename, N, adjacencyMatrix);
+    printAdjacencyMatrix(N, adjacencyMatrix);
+
+    if (isSymmetric(N, adjacencyMatrix)) {
+        cout << "Ma tran ke doi xung." << endl;
+    } else {
+        cout << "Ma tren ke khong doi xung." << endl;
+    }
+
+    return 0;
+}
+
+
+
+
+
+
+
