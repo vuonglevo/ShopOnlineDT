@@ -9,7 +9,7 @@ using namespace std;
 void readAdjacencyMatrix(const string& filename, int &N, vector<vector<int> > &adjacencyMatrix) {
     ifstream file(filename.c_str()); 
     if (!file.is_open()) {
-        cout << "Kh�ng tim thay tep " << filename << endl;
+        cout << "khong thay file " << filename << endl;
         return;
     }
 
